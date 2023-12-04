@@ -1,6 +1,5 @@
 const express = require("express");
 const bodyParser = require("body-parser");
-const axios = require("axios");
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -104,8 +103,6 @@ app.post("/api/recommendations", async (req, res) => {
   try {
     const { userLocation, preferences } = req.body;
 
-    // Fetch data from external APIs (e.g., Yelp, Google Places) if needed
-
     // Generate recommendations based on the provided criteria
     const recommendations = generateRecommendations(userLocation, preferences);
 
@@ -141,7 +138,6 @@ function generateRecommendations(userLocation, preferences) {
 }
 
 function calculateScore(place, userLocation, preferences) {
-  // Simplified scoring logic (adjust as needed)
   let score = 0;
 
   // Distance score (closer is better)
@@ -160,7 +156,7 @@ function calculateScore(place, userLocation, preferences) {
 }
 
 function calculateDistance(location1, location2) {
-  // Simplified distance calculation (you might want to use a more accurate formula in a production environment)
+  // Simplified distance calculation (use some API like Google places to calculate distance in production)
   const latDiff = Math.abs(location1.latitude - location2.latitude);
   const lonDiff = Math.abs(location1.longitude - location2.longitude);
   return latDiff + lonDiff;
